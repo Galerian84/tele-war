@@ -21,9 +21,7 @@
 
     <section class="chat-container">
       <div class="chat-tabs">
-        <ul id="chat-tabs-list">
-          <li class="chat-tab active" data-user="global">Global</li>
-        </ul>
+        <ul id="chat-tabs-list"></ul>
       </div>
       <div class="chat-contents"></div>
       <div class="chat-input">
@@ -33,11 +31,8 @@
     </section>
   </div>
 
-  <!-- Socket.io client -->
   <script src="/socket.io/socket.io.js"></script>
-  <!-- Lógica del tablero -->
   <script type="module" src="js/game.js"></script>
-  <!-- Lógica del chat -->
   <script type="module" src="js/chat.js"></script>
 </body>
 </html>
