@@ -183,3 +183,12 @@ html, body {
   .chat-tab.active {
     background: rgba(100,100,100,0.9);
   }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.5; }
+  }
+  
+  .chat-tab.blink {
+    animation: blink 1s ease-in-out infinite;
+  }
