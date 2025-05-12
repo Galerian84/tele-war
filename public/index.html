@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TELE-WAR Lobby</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="lobby">
+    <h1>TELE-WAR</h1>
+    <div class="login">
+      <input type="text" id="username" placeholder="Introduce tu nombre" />
+      <button id="login-btn">Login</button>
+    </div>
+    <div class="players">
+      <h2>Jugadores:</h2>
+      <ul id="players-list"></ul>
+    </div>
+    <button id="start-btn" disabled>Iniciar partida</button>
+  </div>
+
+  <!-- Cargamos la lógica del lobby como módulo ES6 -->
+  <script type="module" src="js/lobby.js"></script>
+</body>
+</html>
