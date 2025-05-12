@@ -1,56 +1,52 @@
 // lobby.js
-const loginBtn     = document.getElementById('login-btn');
-const startBtn     = document.getElementById('start-btn');
+const socket        = io();
+const loginBtn      = document.getElementById('login-btn');
+const startBtn      = document.getElementById('start-btn');
 const usernameInput = document.getElementById('username');
-const playersList  = document.getElementById('players-list');
+const playersList   = document.getElementById('players-list');
 
-let players = [];
+let loggedIn = false;
 
-/**
- * Añade un jugador si no existe ya y actualiza la UI.
- */
-function addPlayer(name) {
-  if (!players.includes(name)) {
-    players.push(name);
-    updatePlayersUI();
-    startBtn.disabled = players.length === 0;
-  }
-}
-
-/**
- * Vuelca el array de jugadores en la lista del DOM.
- */
-function updatePlayersUI() {
+// Cuando el servidor envía la lista de usuarios conectados:
+socket.on('userlist', users => {
+  // Actualizar UI
   playersList.innerHTML = '';
-  players.forEach(player => {
+  users.forEach(name => {
     const li = document.createElement('li');
-    li.textContent = player;
+    li.textContent = name;
     playersList.appendChild(li);
   });
-}
-
-// Evento de click en Login
-loginBtn.addEventListener('click', () => {
-  const name = usernameInput.value.trim();
-  if (name) {
-    addPlayer(name);
-    usernameInput.value = '';
-    usernameInput.focus();
-  }
+  // Activar el botón de iniciar si al menos 1 usuario
+  startBtn.disabled = users.length === 0;
 });
 
-// Permite hacer Enter para hacer login
+loginBtn.addEventListener('click', () => {
+  const name = usernameInput.value.trim();
+  if (!name || loggedIn) return;
+
+  // 1) Guardar localmente
+  sessionStorage.setItem('username', name);
+  // 2) Avisar al servidor
+  socket.emit('login', name);
+  // 3) Bloquear más logins en este cliente
+  usernameInput.disabled = true;
+  loginBtn.disabled     = true;
+  loggedIn              = true;
+  usernameInput.value   = '';
+  startBtn.disabled     = false; // al menos tú ya cuentas
+});
+
+// Permitir Enter para hacer login
 usernameInput.addEventListener('keypress', e => {
   if (e.key === 'Enter') loginBtn.click();
 });
 
-// Evento de Iniciar partida
+// Cuando alguien pulsa Iniciar partida, vamos al juego
 startBtn.addEventListener('click', () => {
-  // Aquí navegaremos al juego real (pendiente de implementar)
   window.location.href = 'game.html';
 });
 
-// Foco inicial en el input
+// Aseguramos foco en el input al cargar
 document.addEventListener('DOMContentLoaded', () => {
   usernameInput.focus();
 });

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TELE-WAR Juego</title>
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+  <div class="game-container">
+    <aside class="sidebar-left">
+      <h2>Jugadores</h2>
+      <ul id="players-list"></ul>
+    </aside>
+
+    <main class="board-container"></main>
+
+    <aside class="sidebar-right">
+      <h2>Recursos</h2>
+    </aside>
+
+    <section class="chat-container">
+      <div class="chat-tabs">
+        <ul id="chat-tabs-list">
+          <li class="chat-tab active" data-user="global">Global</li>
+        </ul>
+      </div>
+      <div class="chat-contents"></div>
+      <div class="chat-input">
+        <input type="text" id="chat-input-field" placeholder="Escribe un mensaje..." />
+        <button id="chat-send-btn">Enviar</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- Socket.io client -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- Lógica del tablero -->
+  <script type="module" src="js/game.js"></script>
+  <!-- Lógica del chat -->
+  <script type="module" src="js/chat.js"></script>
+</body>
+</html>
