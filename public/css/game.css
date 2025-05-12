@@ -192,3 +192,47 @@ html, body {
   .chat-tab.blink {
     animation: blink 1s ease-in-out infinite;
   }
+
+  .board-container {
+    grid-area: board-container;
+    position: relative;
+    overflow: auto;    /* scroll horizontal + vertical */
+    padding: 0;        /* el canvas ocupa todo el espacio */
+    background: rgba(20,20,20,0.9);
+  }
+  
+  #mapCanvas {
+    display: block;    /* para que el canvas crezca dentro del contenedor */
+  }
+  
+  /* Tooltip que sigue al cursor */
+#hex-tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    display: none;
+    z-index: 1000;
+  }
+
+  /* --- Inventario del jugador --- */
+#player-resources {
+    margin-bottom: 1rem;
+  }
+  #player-resources h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+  }
+  #player-resources ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  #player-resources li {
+    font-size: 0.9rem;
+    margin: 0.2rem 0;
+  }
